@@ -6,19 +6,6 @@ scan a URL using a given wordlist with optional URL transformations
 pip install requestinjector
 ```
 
-### Usage (Command Line Tool)
-```
-requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -m True -r 2 -p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}' -H '{"Content-Type": "text/plain"}' --color True --simple_output True
-	-u [URL] = provide a URL
-	-w [WORDLIST] = provide a path to a wordlist (note: when importing as a module, this can also be a Python list)
-	-m True = mutate the path to check all subpaths, ex. check ""http://example.com/WORD", "http://example.com/somepath/WORD", "http://example.com/somepath/a/WORD", "http://example.com/somepath/a/b/WORD", and "http://example.com/somepath/a/b/c/WORD"
-	-r [NUM] = number of retries to check a domain that can't be reached, before continuing on with other URLs
-	-H [HEADERDICT] = dictionary of header information, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{"Content-Type": "application/json"}'
-	-p [PROXYDICT] = dictionary of proxy information, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{"Content-Type": "application/json"}'
-	--color True = colorize stdout, forces simple_output format
-	--simple_output True = only show the response status code, and the URL checked
-```
-
 ### Usage (Importable Module)
 ```
 from requestinjector import RequestInjector
@@ -29,6 +16,19 @@ url = "http://example.com/somepath/a/b/c"
 
 x = RequestInjector(url=url, wordlist="/path/to/wordlist.txt", threads=10, mutate_path=True, headers=headers, proxy=proxy, retries=1, simple_output=True)
 x.run()
+```
+
+### Usage (Command Line Tool) COMING SOON
+```
+requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -m True -r 2 -p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}' -H '{"Content-Type": "text/plain"}' --color True --simple_output True
+	-u [URL] = provide a URL
+	-w [WORDLIST] = provide a path to a wordlist (note: when importing as a module, this can also be a Python list)
+	-m True = mutate the path to check all subpaths, ex. check ""http://example.com/WORD", "http://example.com/somepath/WORD", "http://example.com/somepath/a/WORD", "http://example.com/somepath/a/b/WORD", and "http://example.com/somepath/a/b/c/WORD"
+	-r [NUM] = number of retries to check a domain that can't be reached, before continuing on with other URLs
+	-H [HEADERDICT] = dictionary of header information, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{"Content-Type": "application/json"}'
+	-p [PROXYDICT] = dictionary of proxy information, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{"Content-Type": "application/json"}'
+	--color True = colorize stdout, forces simple_output format
+	--simple_output True = only show the response status code, and the URL checked
 ```
 
 ### Example Output
