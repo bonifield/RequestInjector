@@ -1,7 +1,7 @@
 # RequestInjector
 scan a URL using a given wordlist with optional URL transformations
 
-### Installation
+### Installation [GitHub](https://github.com/bonifield/RequestInjector) [PyPi](https://pypi.org/project/requestinjector/)
 ```
 pip install requestinjector
 ```
