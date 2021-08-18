@@ -1,8 +1,20 @@
 #!/usr/bin/python3
 
+#=======================================================
 #
-# last updated 2021-08-17
+#	Request Injector by Bonifield (https://github.com/bonifield)
 #
+#	v0.9.2
+#	Last Updated: 2021-08-18
+#
+#	requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -t 10 -m True -r 2 \
+#	-p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}' \
+#	-H '{"Content-Type": "text/plain"}' \
+#	--color True --simple_output True
+#
+#	or import as a module (from requestinjector import RequestInjector)
+#
+#=======================================================
 
 import argparse
 import json
@@ -263,7 +275,6 @@ class RequestInjector:
 		threads = []
 		# begin loading words into queuein
 		f = Filler(queuein, self.wordlist)
-		#f = Filler(queuein, "/home/kali/ri-words.txt")
 		f.name = "Filler"
 		f.start()
 		threads.append(f)
@@ -288,20 +299,8 @@ class RequestInjector:
 
 
 
-#=========================================
-
-
-
-if __name__ == "__main__":
-
-	#	requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -m True -r 2
-	#	-p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}'
-	#	-H '{"Content-Type": "text/plain"}'
-	#		dictionary MUST be wrapped in single-quotes, and keys and values MUST be wrapped in double-quotes
-
-	# time script execution
-	startTime = time.time()
-
+def tool_entrypoint():
+	"""this function handles argparse arguments and serves as the entry_points reference in setup.py"""
 	# collect command line arguments
 	parser = argparse.ArgumentParser(description="RequestInjector: scan a URL using a given wordlist with optional URL transformations")
 	# optional arguments
@@ -327,13 +326,26 @@ if __name__ == "__main__":
 	wordlist = args["wordlist"]
 	color = args["color"]
 	simple_output = args["simple_output"]
-
 	x = RequestInjector(url=url, wordlist=wordlist, threads=threads, mutate_path=mutate_path, headers=headers, proxy=proxy, retries=retries, simple_output=simple_output, color=color) #, simple_output=True)
 	x.run()
+
+
+
+#=========================================
+
+
+
+# this allows the script to be invoked directly (if the repo was cloned, if just this file was downloaded and placed in some bin path, etc)
+# note the time message gets sent to stderr, just 2> /dev/null or comment it out if undesired
+if __name__ == "__main__":
+
+	# time script execution
+	startTime = time.time()
+
+	tool_entrypoint()
 
 	# time script execution
 	endTime = time.time()
 	totalTime = endTime - startTime
 	sys.stderr.write(f"took {totalTime} seconds\n")
 	sys.exit(0)
-
