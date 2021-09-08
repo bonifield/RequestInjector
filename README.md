@@ -11,7 +11,7 @@ pip install requestinjector
 requestinjector -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -t 10 -m True -r 2 \
 	-p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}' \
 	-H '{"Content-Type": "text/plain"}' \
-	--color True --simple_output True
+	--color --simple_output
 
 Arguments:
 	REQUIRED: -u/--url [URL] = provide a URL
