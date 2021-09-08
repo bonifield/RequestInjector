@@ -14,20 +14,20 @@ requestinjector -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt
 	--color True --simple_output True
 
 Arguments:
-	REQUIRED: -u [URL] = provide a URL
-	REQUIRED: -w [WORDLIST] = provide a path to a wordlist (note: when importing as a module, this can also be a Python list)
-	-t [NUM] = number of threads (default 10); each thread uses every URL mutation to check the current word
-	-m True = mutate the path to check all subpaths, ex. check "http://example.com/WORD", "http://example.com/somepath/WORD", "http://example.com/somepath/a/WORD", "http://example.com/somepath/a/b/WORD", and "http://example.com/somepath/a/b/c/WORD"
-	-r [NUM] = number of retries to check a domain that can't be reached, before continuing on with other URLs (default 1)
-	-H [HEADERDICT] = dictionary of header information
+	REQUIRED: -u/--url [URL] = provide a URL
+	REQUIRED: -w/--wordlist [WORDLIST] = provide a path to a wordlist (note: when importing as a module, this can also be a Python list)
+	-t/--threads [NUM] = number of threads (default 10); each thread uses every URL mutation to check the current word
+	-m/--mutate_path = mutate the path to check all subpaths, ex. check "http://example.com/WORD", "http://example.com/somepath/WORD", "http://example.com/somepath/a/WORD", "http://example.com/somepath/a/b/WORD", and "http://example.com/somepath/a/b/c/WORD"
+	-r/--retries [NUM] = number of retries to check a domain that can't be reached, before continuing on with other URLs (default 1)
+	-H/--headers [HEADERDICT] = dictionary of header information
 		- MUST use single-quotes to wrap the dictionary, and double-quotes to wrap the keys and values, ex. '{"Content-Type": "application/json"}'
 		- defaults added unless otherwise specified:
 			User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0
 			Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8
-	-p [PROXYDICT] = dictionary of proxy information
+	-p/--proxy [PROXYDICT] = dictionary of proxy information
 		- MUST use single-quotes to wrap the dictionary, and double-quotes to wrap the keys and values, ex. '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}'
-	--color True = colorize stdout, forces simple_output format
-	--simple_output True = only show the response status code, and the URL checked
+	--color = colorize stdout, forces simple_output format
+	--simple_output = only show the response status code and the URL checked
 ```
 
 ### Usage (Importable Module)

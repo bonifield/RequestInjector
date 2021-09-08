@@ -4,13 +4,13 @@
 #
 #	Request Injector by Bonifield (https://github.com/bonifield)
 #
-#	v0.9.2
-#	Last Updated: 2021-08-18
+#	v0.9.3
+#	Last Updated: 2021-09-08
 #
-#	requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -t 10 -m True -r 2 \
+#	requestinjector.py -u "http://example.com/somepath/a/b/c" -w "/path/to/wordlist.txt" -t 10 -m -r 2 \
 #	-p '{"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}' \
 #	-H '{"Content-Type": "text/plain"}' \
-#	--color True --simple_output True
+#	--color --simple_output
 #
 #	or import as a module (from requestinjector import RequestInjector)
 #
@@ -34,7 +34,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class Filler(threading.Thread):
-	"""fills a queue with words from the provded wordlist"""
+	"""fills a queue with words from the provided wordlist"""
 	def __init__(self, queue, wordlist):
 		threading.Thread.__init__(self)
 		self.setDaemon(True)
@@ -305,12 +305,12 @@ def tool_entrypoint():
 	parser = argparse.ArgumentParser(description="RequestInjector: scan a URL using a given wordlist with optional URL transformations")
 	# optional arguments
 	parser.add_argument("-H", "--headers", dest="headers", default={}, type=json.loads, help="provide a dictionary of headers to include, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{\"Content-Type\": \"application/json\"}' (defaults to a Firefox User-Agent and Accept: text/html) *note default is set inside PathWorker class*")
-	parser.add_argument("-m", "--mutate_path", dest="mutate_path", default=False, type=bool, help="provide True if all parts of the URL path should be checked")
+	parser.add_argument("-m", "--mutate_path", dest="mutate_path", action="store_true", help="provide True if all parts of the URL path should be checked")
 	parser.add_argument("-p", "--proxy", dest="proxy", default={}, type=json.loads, help="provide a dictionary of proxies to use, with single-quotes wrapping the dictionary and double-quotes wrapping the keys and values, ex. '{\"http\": \"http://127.0.0.1:8080\", \"https\": \"https://127.0.0.1:8080\"}'")
 	parser.add_argument("-r", "--retries", dest="retries", default=1, type=int, help="provide the number of times to retry a connection (default 1)")
 	parser.add_argument("-t", "--threads", dest="threads", default=10, type=int, help="provide the number of threads to use (default 10)")
-	parser.add_argument("--color", dest="color", default=False, type=bool, help="provide True if stdout should have colorized status codes (will force simple_output")
-	parser.add_argument("--simple_output", dest="simple_output", default=False, type=bool, help="provide True for simplified output, just status code and URL")
+	parser.add_argument("--color", dest="color", action="store_true", help="provide True if stdout should have colorized status codes (will force simple_output")
+	parser.add_argument("--simple_output", dest="simple_output", action="store_true", help="provide True for simplified output, just status code and URL")
 	# required arguments
 	req = parser.add_argument_group("required arguments")
 	req.add_argument("-u", "--url", dest="url", type=str, help="provide a URL to check", required=True)
