@@ -4,7 +4,8 @@ setup(
 	py_modules=["requestinjector"],
 	entry_points={
 		"console_scripts":[
-			"requestinjector = requestinjector:tool_entrypoint"
+			"requestinjector = requestinjector:tool_entrypoint",
+			"ri = requestinjector:tool_entrypoint"
 		]
 	}
 )
